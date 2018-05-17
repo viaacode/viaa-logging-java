@@ -40,7 +40,6 @@ public class JSONLayout extends AbstractStringLayout {
 
     public static final Charset UTF8 = Charset.forName("UTF-8");
     protected static KeyValuePair[] additionalFields;
-
     private final JsonFactory jsonFactory = new JsonFactory();
 
     /**
@@ -52,7 +51,7 @@ public class JSONLayout extends AbstractStringLayout {
         super(charset);
     }
 
-    /*
+    /**
      * @see
      * org.apache.logging.log4j.core.Layout#toSerializable(org.apache.logging.
      * log4j.core.LogEvent)
@@ -78,18 +77,22 @@ public class JSONLayout extends AbstractStringLayout {
         return StringUtils.EMPTY;
     }
 
-
-    private static void writeBasicFields(final LogEvent event, final JsonGenerator g)
-            throws IOException {
+    /**
+     * writeBasicFields
+     */
+    private static void writeBasicFields(final LogEvent event,
+                                         final JsonGenerator g) throws IOException {
         g.writeStringField("logger", event.getLoggerName());
         g.writeStringField("level", event.getLevel().toString());
         g.writeNumberField("timestamp", event.getTimeMillis());
         g.writeStringField("threadName", event.getThreadName());
     }
 
+    /**
+     * writeMessageField
+     */
     private static void writeMessageField(final LogEvent event,
                                           final JsonGenerator g) throws IOException {
-
         final Message message = event.getMessage();
         if (message == null) return;
 
@@ -102,7 +105,11 @@ public class JSONLayout extends AbstractStringLayout {
         }
     }
 
-    private static void writeMDC(final LogEvent event, final JsonGenerator g) throws IOException {
+    /**
+     * Write Mapped Diagnostic Context or MDC
+     */
+    private static void writeMDC(final LogEvent event,
+                                 final JsonGenerator g) throws IOException {
         Map<String, String> additionalData = event.getContextData().toMap();
         String applicationName = "UNKNOWN";
         if (additionalData.containsKey("APPLICATION")) {
@@ -113,7 +120,11 @@ public class JSONLayout extends AbstractStringLayout {
         writeStringMap("additional_data", additionalData, g);
     }
 
-    private static void writeNDC(final LogEvent event, final JsonGenerator g) throws IOException {
+    /**
+     * Write Nested Diagonostic Context or NDC
+     */
+    private static void writeNDC(final LogEvent event,
+                                 final JsonGenerator g) throws IOException {
         final ContextStack ndc = event.getContextStack();
         if (ndc == null || ndc.getDepth() == 0) return;
 
@@ -125,7 +136,6 @@ public class JSONLayout extends AbstractStringLayout {
         g.writeEndArray();
     }
 
-
     /**
      * Write the given stringMap as a JSON object with the given mapName
      *
@@ -134,7 +144,9 @@ public class JSONLayout extends AbstractStringLayout {
      * @param g
      * @throws IOException
      */
-    private static void writeStringMap(final String mapName, final Map<String, String> stringMap, final JsonGenerator g) throws IOException {
+    private static void writeStringMap(final String mapName,
+                                       final Map<String, String> stringMap,
+                                       final JsonGenerator g) throws IOException {
         if (stringMap == null || stringMap.isEmpty()) return;
         g.writeFieldName(mapName);
         g.writeStartObject();
@@ -148,6 +160,9 @@ public class JSONLayout extends AbstractStringLayout {
         g.writeEndObject();
     }
 
+    /**
+     * writeThrowableEvents
+     */
     private static void writeThrowableEvents(final LogEvent event,
                                              final JsonGenerator g) throws IOException {
         final Throwable thrown = event.getThrown();
@@ -165,6 +180,9 @@ public class JSONLayout extends AbstractStringLayout {
         g.writeStringField("throwable", throwableString);
     }
 
+    /**
+     * createLayout
+     */
     @PluginFactory
     public static JSONLayout createLayout(
             @PluginAttribute("charset") final String charset) {
@@ -181,4 +199,3 @@ public class JSONLayout extends AbstractStringLayout {
     }
 
 }
-

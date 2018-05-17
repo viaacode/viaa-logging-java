@@ -79,6 +79,8 @@ public class JSONLayout extends AbstractStringLayout {
 
     /**
      * writeBasicFields
+     * 
+     * TODO: This function should probably handle writing the trace_id as well.
      */
     private static void writeBasicFields(final LogEvent event,
                                          final JsonGenerator g) throws IOException {
@@ -111,12 +113,31 @@ public class JSONLayout extends AbstractStringLayout {
     private static void writeMDC(final LogEvent event,
                                  final JsonGenerator g) throws IOException {
         Map<String, String> additionalData = event.getContextData().toMap();
+        // Get applicationName
         String applicationName = "UNKNOWN";
+        //~ String keyName = "APPLICATION";
         if (additionalData.containsKey("APPLICATION")) {
             applicationName = additionalData.get("APPLICATION").toString();
             additionalData.remove("APPLICATION");
         }
-        g.writeStringField("application", applicationName);
+        g.writeStringField("application_name", applicationName);
+        // Get traceID
+        String traceID = "UNKNOWN";
+        //~ String keyName = "x_viaa_trace_id";
+        if (additionalData.containsKey("x_viaa_trace_id")) {
+            traceID = additionalData.get("x_viaa_trace_id").toString();
+            additionalData.remove("x_viaa_trace_id");
+        }
+        g.writeStringField("x_viaa_trace_id", traceID);
+        // applicationVersion
+        String applicationVersion = "UNKNOWN";
+        //~ String keyName = "application_version";
+        if (additionalData.containsKey("application_version")) {
+            applicationVersion = additionalData.get("application_version").toString();
+            additionalData.remove("application_version");
+        }
+        g.writeStringField("application_version", applicationVersion);
+        // Write any remaining data to the additional_data field.
         writeStringMap("additional_data", additionalData, g);
     }
 

@@ -8,11 +8,12 @@ TODO
 
 ## Installation
 
-Repository to add in your Maven-based project's ```pom.xml```.
+**Repository** to add in your Maven-based project's ```pom.xml```.
 
 ```xml
 <repositories>
   ...
+  <!-- VIAA repositories -->
   <repository>
     <id>be.viaa</id>
     <name>VIAA Repository</name>
@@ -23,23 +24,28 @@ Repository to add in your Maven-based project's ```pom.xml```.
 </repositories>
 ```
 
-Dependency to add in your Maven-based project's ```pom.xml```. Alternatively, you can add the repository in the server- and repositories-sections of your Maven's ```settings.xml```. (See: [https://maven.apache.org/settings.html](https://maven.apache.org/settings.html)).
+**Dependency** to add in your Maven-based project's ```pom.xml```. Alternatively, you can add the repository in the server- and repositories-sections of your Maven's ```settings.xml```. (See: [https://maven.apache.org/settings.html](https://maven.apache.org/settings.html)).
 
 ```xml
 <dependencies>
   ...
+  <!-- VIAA dependencies -->
   <dependency>
     <groupId>be.viaa</groupId>
     <artifactId>viaa-logging-java</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
   </dependency>
   ...
 </dependencies>
 ```
 
+This will download and install the SNAPSHOT-version into your project.
+
 Build your project:
 
 ```$ mvn package```
+
+Or, in Mule: right-click on project --> Mule --> Update Project Dependencies.
 
 ## Usage
 
@@ -76,5 +82,5 @@ Sample ```log4j2.xml``` file:
 </Configuration>
 ```
 
-*Note the ```packages="be.viaa.log4j2"``` attribute on the Configuration element!*
+**Note the ```packages="be.viaa.log4j2"``` attribute on the Configuration element!**
 

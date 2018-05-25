@@ -7,6 +7,7 @@
     <groupId>be.viaa</groupId>
     <artifactId>viaa-logging-java</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <build>
         <plugins>
             <plugin>
@@ -39,12 +40,12 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>QASRepositoryVIAA</id>
-            <url>http://do-qas-mvn-01.do.viaa.be:8081/nexus/content/repositories/snapshots/</url>
+            <id>viaa-snapshots-repo</id>
+            <url>http://do-qas-mvn-01.do.viaa.be:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>QASRepositoryVIAA</id>
-            <url>http://do-qas-mvn-01.do.viaa.be:8081/nexus/content/repositories/releases/</url>
+            <id>viaa-releases-repo</id>
+            <url>http://do-qas-mvn-01.do.viaa.be:8081/nexus/content/repositories/releases</url>
         </repository>
     </distributionManagement>
 

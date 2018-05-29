@@ -1,6 +1,6 @@
 # viaa-logging-java
 
-Java-implementation of VIAA's JSON layout logstash logger. It uses Log4j 2.x.
+Java-implementation of VIAA's JSON layout logstash logger. It uses Log4j 2.x to send json-formatted logrecords to logstash over an UDP-socket.
 
 ## Synopsis
 
@@ -62,7 +62,7 @@ Sample ```log4j2.xml``` file:
             <SizeBasedTriggeringPolicy size="10 MB" />
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>
-        <Socket name="logstash" host="logstash-host" port="logstash-port">
+        <Socket name="logstash" host="logstash-host" port="logstash-port" protocol="UDP">
             <CustomJSONLayout />
         </Socket>
         <Rewrite name="rewrite">

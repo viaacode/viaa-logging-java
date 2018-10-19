@@ -41,11 +41,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>viaa-snapshots-repo</id>
-            <url>http://do-qas-mvn-01.do.viaa.be:8081/nexus/content/repositories/snapshots</url>
+            <url>http://do-qas-mvn-01.do.viaa.be:8081/repository/maven-snapshots</url>
         </snapshotRepository>
         <repository>
             <id>viaa-releases-repo</id>
-            <url>http://do-qas-mvn-01.do.viaa.be:8081/nexus/content/repositories/releases</url>
+            <url>http://do-qas-mvn-01.do.viaa.be:8081/repository/maven-releases</url>
         </repository>
     </distributionManagement>
 
